@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Blog</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/co/4.1.0/index.js"></script>
+    <script type="module" src="main.js"></script>
+
+    <!-- <script type="module" src="/.libs.js"></script> -->
+</head>
+
+<body style="background-image: url(bg.jpg);">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Customer Management</h4>
+                <form class="needs-validation" novalidate>
+                    <div class=" form-group">
+
+                        <label for="firstName">First Name: </label>
+                        <input type="text" class="form-control" placeholder="Enter First Name" name="firstName"
+                            id="firstName" onblur="doValidation(this)" />
+                        <p id="firstName_errors" class="error"></p>
+                    </div>
+                    <div class=" form-group">
+                        <label for="lastName">Last Name: </label>
+                        <input type="text" name="lastName" id="lastName" class="form-control"
+                            placeholder="Enter Last Name" required minlength="1" maxlength="50" required
+                            onblur="doValidation(this)" />
+                        <p id="lastName_errors" class="error"></p>
+                    </div>
+                    <div class=" form-group">
+                        <label for="email">Email: </label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email Id"
+                            required minlength="2" maxlength="50" required onblur="doValidation(this)" />
+                        <p id="email_errors" class="error"></p>
+                    </div>
+                    <div class=" form-group">
+                        <label for="mobile">Mobile: </label>
+                        <input type="number" name="mobile" id="mobile" class="form-control"
+                            placeholder="Enter 10 digit Mobile No" required minlength="10" maxlength="50" required
+                            onblur="doValidation(this)" onkeyup="checkLength(this)" />
+                        <p id="mobile_errors" class="error"></p>
+                    </div>
+                    <input type="submit" class="btn btn-success active" value="Add" id="mySubmit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="customers">
+        <table id="customersTable" class="table table-bordered" style="background-color: aliceblue;">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Mobile No
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+        </table>
+
+
+    </div>
+    <script>
+        function doValidation(obj) {
+            //alert(obj.id);
+            let firstName = document.querySelector("#firstName").value;
+            let lastName = document.querySelector("#lastName").value;
+            let email = document.querySelector("#email").value;
+            let mobile = document.querySelector("#mobile").value;
+            let btn = document.getElementById("mySubmit");
+            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            if (obj.id == "firstName") {
+                if (firstName.length < 3 || isNaN(firstName) == false) {
+                    document.getElementById("firstName_errors").innerHTML = "Please Enter a valid first name";
+                    btn.disabled = true;
+                    btn.setAttribute("class", "btn btn-success disabled");
+                    return;
+                } else {
+                    document.getElementById("firstName_errors").style.display = "none";
+                    btn.disabled = false;
+                    btn.setAttribute("class", "btn btn-success active");
+                }
+            } else if (obj.id == "lastName") {
+                if (lastName.length < 3 || isNaN(lastName) == false) {
+                    document.getElementById("lastName_errors").innerHTML = "Please Enter a valid last name";
+                    btn.disabled = true;
+                    btn.setAttribute("class", "btn btn-success disabled");
+                    return;
+                } else {
+                    document.getElementById("lastName_errors").style.display = "none";
+                    btn.disabled = false;
+                    btn.setAttribute("class", "btn btn-success active");
+                }
+            } else if (obj.id == "email") {
+                if (reg.test(email) == false) {
+
+                    document.getElementById("email_errors").innerHTML = "Please Enter a valid Email Id";
+                    btn.disabled = true;
+                    btn.setAttribute("class", "btn btn-success disabled");
+                    return;
+                } else {
+                    document.getElementById("email_errors").style.display = "none";
+                    btn.disabled = false;
+                    btn.setAttribute("class", "btn btn-success active");
+                }
+            } else if (obj.id == "mobile") {
+                if (mobile.length < 10) {
+                    document.getElementById("mobile_errors").innerHTML =
+                        "Please Enter a valid 10 digit mobile number";
+                    btn.disabled = true;
+                    btn.setAttribute("class", "btn btn-success disabled");
+                    return;
+                } else {
+                    document.getElementById("mobile_errors").style.display = "none";
+                    btn.disabled = false;
+                    btn.setAttribute("class", "btn btn-success active");
+                }
+
+            }
+        }
+
+        function checkLength(obj) {
+
+            if (obj.value.length >= 10) {
+                let btn = document.getElementById("mySubmit");
+                btn.disabled = false;
+                btn.setAttribute("class", "btn btn-success active");
+            }
+
+        }
+    </script>
+</body>
+
+</html>

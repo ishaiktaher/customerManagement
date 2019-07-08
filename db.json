@@ -1,0 +1,25 @@
+{
+  "customers": [
+    {
+      "firstName": "Zahed",
+      "lastName": "Ali",
+      "email": "zahed@ali.com",
+      "mobile": "1234567890",
+      "id": 2
+    },
+    {
+      "firstName": "Salman",
+      "lastName": "Khan",
+      "email": "salman@khan.com",
+      "mobile": "0987654321",
+      "id": 3
+    },
+    {
+      "firstName": "Anna",
+      "lastName": "Thomas",
+      "email": "anna@thomas.com",
+      "mobile": "9089786756",
+      "id": 4
+    }
+  ]
+}
